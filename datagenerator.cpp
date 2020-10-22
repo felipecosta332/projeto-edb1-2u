@@ -1,58 +1,85 @@
-#include <iostream>
-#include <fstream>
-#include <cstdlib>
 #include <chrono>
+#include <cstdlib>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <string>
 
-/*void linearSearch(std::ofstream &writer, int target, int size, int *vector) {
+void swap(int *xp, int *yp) 
+{ 
+	int temp = *xp; 
+	*xp = *yp; 
+	*yp = temp; 
+} 
+
+void bubbleSort(std::ofstream &writer, int arr[], int n) 
+{
     clock_t begin = clock();
-    for (int i = 0; i < size; i++) {
-        if (vector[i] == target) {
-            break;
-        }
-    }
+	int i, j; 
+	bool swapped; 
+	for (i = 0; i < n-1; i++) 
+	{ 
+		swapped = false; 
+		for (j = 0; j < n-i-1; j++) 
+		{ 
+			if (arr[j] > arr[j+1]) 
+			{ 
+				swap(&arr[j], &arr[j+1]); 
+				swapped = true; 
+			} 
+		} 
+
+		if (swapped == false) 
+			break; 
+	} 
     clock_t end = clock();
-    double time = double (end - begin) * 1000;
-    writer << size << " " << time << std::endl;
+    int time = (double) (end - begin) * 1000;
+    writer << n << " " << time << std::endl;
 }
 
-void binarySearch(std::ofstream &writer, int target, int size, int *vector) {
+void selectionSort(std::ofstream &writer, int arr[], int n)  
+{ 
     clock_t begin = clock();
-    int start = 0, last = size - 1, half;
-    while (start <= last) {
-        half = (start + last) / 2;
-        if (target < vector[half]) {
-            last = half -1;
-        } else if (target > vector[half]) {
-            start = half + 1;
-        } else {
-            break;
-        }
-    }
+    int i, j, min_idx;  
+  
+    for (i = 0; i < n-1; i++)  
+    {  
+        min_idx = i;  
+        for (j = i+1; j < n; j++)  
+        if (arr[j] < arr[min_idx])  
+            min_idx = j;  
+  
+        swap(&arr[min_idx], &arr[i]);  
+    }  
     clock_t end = clock();
-    double time = double (end - begin) * 1000;
-    writer << size << " " << time << std::endl;
-}*/
-
-
+    int time = (double) (end - begin) * 1000;
+    writer << n << " " << time << std::endl;
+}
 
 int main() {
-    int input;
-    std::ifstream dataReader("testcases.txt");
-    std::ofstream linearWriter("lineardata.csv");
-    std::ofstream binaryWriter("binarydata.csv");
-    dataReader >> input;
-    while (input != 0) {
-        int vector[input];
-        int target = rand() % input + 1;
-        for (int i = 0; i < input; i++) {
-            dataReader >> vector[i];
+    srand(time(0));
+    for (int i = 1; i <= 10; i++) {
+        std::string bubbleFile, selectionFile;
+        std::ostringstream fileName;
+        fileName << "data/bubbledata" << i << ".csv";
+        bubbleFile = fileName.str();
+        fileName.str("");
+        fileName.clear();
+        fileName << "data/selectiondata" << i << ".csv";
+        selectionFile = fileName.str();
+        std::ofstream bubbleWriter(bubbleFile);
+        std::ofstream selectionWriter(selectionFile);
+        for (int j = 1; j <= 1000; j++) {
+            int vectorA[j], vectorB[j];
+            for (int k = 0; k < j; k++) {
+                vectorA[k] = rand() % 100;
+                vectorB[k] = vectorA[k];
+            }
+            bubbleSort(bubbleWriter, vectorA, j);
+            selectionSort(selectionWriter, vectorB, j);
         }
-        // linearSearch(linearWriter, target, input, &vector[0]);
-        // binarySearch(binaryWriter, target, input, &vector[0]);
-        dataReader >> input;
+        bubbleWriter.close();
+        selectionWriter.close();
     }
-    dataReader.close();
-    linearWriter.close();
-    binaryWriter.close();
     return 0;
 }

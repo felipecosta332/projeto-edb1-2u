@@ -1,7 +1,3 @@
-binarydata.csv
-lineardata.csv
-testcases.txt
-binarysearch
+data/
+.vscode/
 datagenerator
-linearsearch
-testcasegenerator

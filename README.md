@@ -7,7 +7,7 @@
 #### Definition
 
 - Single, pairs of 2 or trios of 3
-- Choose one or two simple algorithms (linear search, binary search, fibonacci, power, etc.)
+- Choose one or two sorting algorithms
 
 #### To implement
 
@@ -19,5 +19,5 @@
 #### Report
 
 - In PDF format (text or slides)
-- Present in up to 10 min (up to 15 min depending on how many groups fit on time) 17/09/2020 - 07:30 am
-- Deliver via SIGAA 16/09/2020 23:59
+- Present in up to 10 min (up to 15 min depending on how many groups fit on time) 22/10/2020 - 07:30 am and 27/10/2020 - 07:30am
+- Deliver via SIGAA 21/10/2020 12:00
